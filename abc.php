@@ -2,7 +2,7 @@
 date_default_timezone_get('PRC');
 
 //单例模式  应用于数据库设计类，只连一次数据库
-class Datebase
+/*class Datebase
 {
     //私有的静态属性来保存类实例
     private static $link;
@@ -36,7 +36,7 @@ class Datebase
 
 $a = Datebase::getInstance();
 var_dump($a);
-echo '<br>';
+echo '<br>';*/
 
 //工厂设计模式   根据传参不同进行不同的实例化类    mvc框架中数据库操作类  Db类
 /**
@@ -210,6 +210,86 @@ $buyTicket->addObserver(new Dikou());
 $buyTicket->buyTicket('一排一号');
 
 
+/**
+ * 适配器模式
+ * 一个接口，多个类实现适配正常工作
+ */
+interface IDatabase
+{
+    //数据库链接方法
+    public function connect($host, $username, $password, $database);
+    //sql查询方法
+    public function query($sql);
+    //关闭数据库
+    public function close();
+}
+
+/**
+ * Class Mysql 适配器
+ */
+class Mysql implements IDatabase
+{
+    protected $connect;
+    //实现链接方法
+    public function connect($host, $username, $password, $database)
+    {
+        // TODO: Implement connect() method.
+        $connect = mysql_connect($host, $username, $password);
+        mysql_select_db($database);
+        $this->connect = $connect;
+    }
+
+    //实现查询方法
+    public function query($sql)
+    {
+        // TODO: Implement query() method.
+        return mysql_query($sql);
+    }
+
+    //实现关闭方法
+    public function close()
+    {
+        // TODO: Implement close() method.
+        mysql_close();
+    }
+}
+
+class mysql_i implements IDatabase
+{
+    protected $link;
+
+    public function connect($host, $username, $password, $database)
+    {
+        // TODO: Implement connect() method.
+        $this->link = mysqli_connect($host, $username, $password, $database);
+        return $this->link;
+    }
+
+    public function query($sql)
+    {
+        // TODO: Implement query() method.
+        return mysqli_query($this->link, $sql);
+    }
+
+    public function close()
+    {
+        // TODO: Implement close() method.
+        mysqli_close($this->link);
+    }
+}
+
+$host = '127.0.0.1';
+$username = 'root';
+$password = 'root';
+$database = 'test';
+
+$mysqli = new mysql_i();
+$mysqli->connect($host, $username, $password, $database);
+$sql = 'insert into user (name, age) values ("test", 12)';
+//$sql = 'select * from user';
+$res = $mysqli->query($sql);
+var_dump(mysqli_fetch_array($res));
+$mysqli->close();
 
 
 
