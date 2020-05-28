@@ -2,11 +2,12 @@
 date_default_timezone_get('PRC');
 
 //单例模式  应用于数据库设计类，只连一次数据库
-/*class Datebase
+class Datebase
 {
     //私有的静态属性来保存类实例
     private static $link;
 
+    //private 和 protect 构造方法不能被实例化
     private function __construct()
     {
     }
@@ -33,10 +34,9 @@ date_default_timezone_get('PRC');
         }
     }
 }
-
 $a = Datebase::getInstance();
 var_dump($a);
-echo '<br>';*/
+echo '<br>';
 
 //工厂设计模式   根据传参不同进行不同的实例化类    mvc框架中数据库操作类  Db类
 /**
@@ -290,6 +290,31 @@ $sql = 'insert into user (name, age) values ("test", 12)';
 $res = $mysqli->query($sql);
 var_dump(mysqli_fetch_array($res));
 $mysqli->close();
+
+/**
+ * psr规范
+ * psr-1  基本代码规范
+ * psr-2  编码规范
+ * psr-3  日志接口规范
+ * psr-4  自动加载规范
+ *
+ * 静态调用和实例化的区别：静态调用不能用$this;类名::方法名调用； 实例化产生对象，静态方法可以用对象调用。
+ *
+ * 数据库三大范式
+ * 1、属性不可分割，表中每个字段是不可再拆分的
+ * 2、表中要有主键，主键约束
+ * 3、表中不能有其他表中存在的、存储信息相同的字段，往往是通过外键建立联系
+ *
+ *
+ * 复合索引：一个索引包含多个字段；遵循最左前缀查询
+ * 索引覆盖：查询的字段被所使用的索引覆盖
+ *
+ *
+ * http和https的区别
+ *http是超文本传输协议，是以明文方式发送信息的；https是具有安全性的ssl加密传输协议
+ *http和https使用的是完全不同的链接方式，使用的端口也不一样，http是80端口，https是443端口
+ *http的链接是无状态的（数据包的发送、传输、接受都是相互独立的）；https协议是由ssl+http协议构建的可进行加密传输、身份认证的网络协议，比http安全
+ */
 
 
 
