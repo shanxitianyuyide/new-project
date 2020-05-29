@@ -1,7 +1,7 @@
 <?php
 
-addGoods();
-
+$res = addGoods();
+var_dump($res);
 /*
  * 添加商品
  */
