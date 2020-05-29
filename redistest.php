@@ -6,14 +6,14 @@ $listKey = '20200529_goods_list';
 //$redis->lTrim($listKey, 1, 30);
 
 
-//$res = getGoodsList($redis, $listKey);
-//var_dump($res);
+$res = getGoodsList($redis, $listKey);
+var_dump($res);
 
 //kill($redis, $listKey);
 //echo $row;
 
-$row = $redis->hGetAll('20200529_buy_order');
-print_r($row);
+//$row = $redis->hGetAll('20200529_buy_order');
+//print_r($row);
 /*
  * 添加商品
  */
