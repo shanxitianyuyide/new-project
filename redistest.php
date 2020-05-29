@@ -5,12 +5,12 @@ $redis->connect('127.0.0.1', '6379');
 $listKey = '20200529_goods_list';
 $redis->lTrim($listKey, 1, 30);
 
-$res = getGoodsList($redis);
+$res = getGoodsList($redis, $listKey);
 var_dump($res);
 /*
  * 添加商品
  */
-function addGoods($redis)
+function addGoods($redis, $listKey)
 {
     $count = 30;
 
@@ -19,7 +19,7 @@ function addGoods($redis)
     }
 }
 
-function getGoodsList($redis)
+function getGoodsList($redis, $listKey)
 {
     $goods = $redis->lRange($listKey, 0, -1);
     return $goods;
