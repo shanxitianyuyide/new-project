@@ -9,8 +9,11 @@ $listKey = '20200529_goods_list';
 //$res = getGoodsList($redis, $listKey);
 //var_dump($res);
 
-$row = kill($redis, $listKey);
-echo $row;
+//$row = kill($redis, $listKey);
+//echo $row;
+
+$row = $redis->hGetAll('20200529_buy_order');
+print_r($row);
 /*
  * 添加商品
  */
