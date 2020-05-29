@@ -16,6 +16,9 @@ function addGoods()
     for ($i = 0; $i < $count; $i++) {
         $redis->rPush($listKey, $i);
     }
+
+    $goods = $redis->lRange($listKey, 0, -1);
+    return $goods;
 }
 
 
