@@ -10,7 +10,7 @@ $host = '0.0.0.0';
 $port = 9501;
 $mode = 'SWOOLE_PROCESS';
 $socke_type = 'SWOOLE_SOCK_TYPE';
-$serv = new swoole_server($host, $port, $mode, $socke_type);
+$serv = new swoole_server($host, $port);
 
 //使用
 /**
