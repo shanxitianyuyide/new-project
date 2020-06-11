@@ -8,7 +8,7 @@
  */
 $host = '0.0.0.0';
 $port = 9501;
-$serv = swoole_server($host, $port, $mode, $socke_type);
+$serv = new swoole_server($host, $port, $mode, $socke_type);
 
 //使用
 /**
