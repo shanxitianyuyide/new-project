@@ -28,5 +28,4 @@ class SwooleWebsocket
         $this->websocket->start();
     }
 }
-
 new SwooleWebsocket();
